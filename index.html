@@ -1,40 +1,450 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <style>
+      .fragment.blur {
+        filter: blur(10px);
+      }
+      .fragment.blur.visible {
+        filter: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-auto-animate>
+          <img
+            height="200px"
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg"
+          />
+          <h2>What is TypeScript?</h2>
+        </section>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+        <section data-auto-animate>
+          <img
+            src="https://serokell.io/files/0u/0ufu1q21.js-ts.jpg"
+            height="500px"
+          />
+        </section>
+
+        <section data-auto-animate>
+          <img
+            src="https://media.makeameme.org/created/just-try-to-3cbd71d66a.jpg"
+          />
+        </section>
+
+        <section data-auto-animate>
+          <h4>Top Languages on GitHub</h4>
+
+          <img src="/public/languages-popularity.png" />
+        </section>
+
+        <section data-auto-animate>
+          <h4>SO Developer Survey (2022): Loved vs Dreaded</h4>
+
+          <img src="/public/loved-vs-dreaded-2022.png" height="600px" />
+        </section>
+
+        <section data-auto-animate>
+          <img
+            src="https://media.giphy.com/media/iibEPf8xEDTedJcDJr/giphy.gif"
+          />
+        </section>
+
+        <section data-auto-animate>
+          <section data-auto-animate>
+            <h3>Typing Values</h3>
+            <p>explicitly typed</p>
+
+            <pre><code data-trim data-noescape class="language-typescript">
+              const myString: string = "Hello World";
+
+              const myNumber: number = 42;
+
+              const myBool: boolean = false;
+            </code></pre>
+          </section>
+
+          <section data-auto-animate>
+            <h3>Typing Values</h3>
+            <p>implicitly typed</p>
+
+            <pre><code data-trim data-noescape class="language-typescript">
+              const myString = "Hello World"; // type is string
+
+              const myNumber = 42; // type is number
+
+              const myBool = false; // type is boolean
+            </code></pre>
+          </section>
+
+          <section data-auto-animate>
+            <h3>Typing Values</h3>
+            <p><code>as const</code></p>
+
+            <p class="fragment">Defines a value with an exact type</p>
+          </section>
+
+          <section data-auto-animate>
+            <h3>Typing Values</h3>
+            <p><code>as const</code></p>
+
+            <pre><code data-trim data-noescape class="language-typescript">
+                const myString = "Hello World" as const;
+                // ^^ type is 'Hello World'
+
+                const myNumber = 42 as const;
+                // ^^ type is 42
+
+                const myBool = false as const;
+                // ^^ type is false
+              </code></pre>
+          </section>
+
+          <section data-auto-animate>
+            <h3>Typing Values</h3>
+            <h3><code>satisfies</code></h3>
+
+            <p class="fragment">Asserts that a value extends a type</p>
+          </section>
+
+          <section data-auto-animate>
+            <h3>Typing Values</h3>
+            <p><code>satisfies</code></p>
+
+            <pre><code data-trim data-noescape class="language-typescript" data-line-numbers="1-4,6,10-11">
+              interface AppBase {
+                name: string;
+                url: string;
+              }
+
+              const app: AppBase = {
+                name: 'My App',
+                url: 'https://myapp.com',
+
+                version: '1.0.0',
+                // ^^ TS complains about an unknown key...
+              };
+            </code></pre>
+          </section>
+
+          <section data-auto-animate>
+            <h3>Typing Values</h3>
+            <p><code>satisfies</code></p>
+
+            <pre><code data-trim data-noescape class="language-typescript" data-line-numbers="10|12">
+                interface AppBase {
+                  name: string;
+                  url: string;
+                }
+
+                const app = {
+                  name: 'My App',
+                  url: 'https://myapp.com',
+                  version: '1.0.0',
+                } satisfies AppBase;
+
+                // we can say that app extends AppBase
+              </code></pre>
+          </section>
+        </section>
+
+        <section data-auto-animate>
+          <section data-auto-animate>
+            <h3><code>interface</code></h3>
+            <pre><code data-trim data-noescape class="language-typescript">
+              interface Shoe {
+                size: number;
+                brand: string;
+              }
+            </code></pre>
+          </section>
+
+          <section data-auto-animate>
+            <h3><code>interface</code></h3>
+
+            <p><code>... extends</code></p>
+
+            <pre><code data-trim data-noescape class="language-typescript">
+              <script type="text/template">
+                interface Brand {
+                  brand: string;
+                }
+
+                interface Shoe extends Brand {
+                  size: number;
+                }
+              </script>
+            </code></pre>
+          </section>
+        </section>
+
+        <section data-auto-animate>
+          <section data-auto-animate>
+            <h3><code>type</code></h3>
+            <pre><code data-trim data-noescape class="language-typescript">
+              <script type="text/template">
+                type MyType = string | boolean;
+              </script>
+            </code></pre>
+          </section>
+
+          <section data-auto-animate>
+            <h3><code>type</code></h3>
+            <p>
+              <code>... extends?</code>
+            </p>
+            <p class="fragment"><em>kind of</em></p>
+          </section>
+
+          <section data-auto-animate>
+            <h3><code>type</code></h3>
+            <p><code>&&nbsp;</code>and<code>&nbsp;|</code></p>
+
+            <pre><code data-trim data-noescape class="language-typescript" data-line-numbers="1-3|5|7-10">
+              <script type="text/template">
+                interface Foo { foo: true }
+                interface Bar { bar: true }
+                interface Baz { baz: true }
+
+                type MyType = (Foo | Bar) & Baz
+
+                // equivalent
+                type MyType =
+                  | { foo: true; baz: true }
+                  | { bar: true; baz: true }
+              </script>
+            </code></pre>
+          </section>
+        </section>
+
+        <section data-auto-animate>
+          <h3>generic types</h3>
+
+          <pre><code data-trim data-noescape class="language-typescript" data-line-numbers="1-4|6|8-12">
+              <script type="text/template">
+                interface MyInterface <TFoo extends string> {
+                  foo: TFoo;
+                  bar: boolean;
+                }
+
+                type FooType = MyInterface<'foo'>;
+
+                // equivalent
+                type FooType = {
+                  foo: 'foo';
+                  bar: boolean;
+                };
+              </script>
+            </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <section data-auto-animate>
+            <h4><code>Record&lt;K extends string, V&gt;</code></h4>
+
+            <pre><code data-trim data-noescape class="language-typescript" data-line-numbers="1|3-7">
+              <script type="text/template">
+                type MyRecord = Record<'foo' | 'bar', boolean>;
+
+                // equivalent
+                interface MyRecord {
+                  foo: boolean;
+                  bar: boolean;
+                };
+              </script>
+            </code></pre>
+          </section>
+        </section>
+
+        <section data-auto-animate>
+          <section data-auto-animate>
+            <h4><code>keyof</code></h4>
+            <p class="fragment">Gives the keys of an object type</p>
+          </section>
+
+          <section data-auto-animate>
+            <h4><code>keyof</code></h4>
+
+            <pre><code data-trim data-noescape class="language-typescript" data-line-numbers="1 | 3 | 5-6">
+              <script type="text/template">
+                type MyRecord = Record<'foo' | 'bar', boolean>;
+
+                type MyRecordKey = keyof MyRecord;
+
+                // equivalent
+                type MyRecordKey = 'foo' | 'bar';
+              </script>
+            </code></pre>
+          </section>
+        </section>
+
+        <section data-auto-animate>
+          <h4><code>Pick&lt;T, K extends keyof T&gt;</code></h4>
+
+          <pre><code data-trim data-noescape class="language-typescript" data-line-numbers="1-5|7|9-13">
+            <script type="text/template">
+              interface MyInterface {
+                foo: 'fooValue';
+                bar: 'barValue';
+                baz: 'bazValue';
+              }
+
+              type MyPicked = Pick<MyInterface, 'foo' | 'bar'>;
+
+              // equivalent
+              interface MyPicked {
+                foo: 'fooValue';
+                bar: 'barValue';
+              };
+            </script>
+          </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <h3>Type Guards</h3>
+
+          <pre><code data-trim data-noescape class="language-typescript" data-line-numbers="1|3|5|7-9">
+            type Fruit = '🍎' | '🍊' | '🍌';
+
+            const isApple = (x: Fruit): x is '🍎' => x === '🍎';
+
+            declare const myFruit: Fruit;
+
+            if (isApple(myFruit)) {
+              // myFruit is '🍎' in this block
+            }
+          </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <section data-auto-animate>
+            <h3>Generic Functions</h3>
+
+            <pre><code data-trim data-noescape class="language-typescript" data-line-numbers="1-3|5|7">
+            <script type="text/template">
+              const identity = <T>(value: T): T => {
+                return value;
+              }
+
+              const myNumber = identity<number>(42);  // type is number
+
+              const myString = identity("Hello");     // type is string
+            </script>
+          </code></pre>
+          </section>
+
+          <section data-auto-animate>
+            <h3>Generic Functions</h3>
+            <p>with const</p>
+
+            <pre><code data-trim data-noescape class="language-typescript" data-line-numbers="1|5|7">
+              <script type="text/template">
+                const identity = <const T>(value: T): T => {
+                  return value;
+                }
+                
+                const myNumber = identity(42);      // type is 42
+                
+                const myString = identity("Hello"); // type is 'Hello'
+              </script>
+            </code></pre>
+          </section>
+
+          <section data-auto-animate>
+            <h3>Generic Functions</h3>
+            <p>and extends</p>
+
+            <pre><code data-trim data-noescape class="language-typescript" data-line-numbers="1|5-6|8">
+              <script type="text/template">
+                const identity = <const T extends string>(value: T): T => {
+                  return value;
+                }
+
+                const myNumber = identity(42);
+                // ^^ TS complains number is not assignable to string
+
+                const myString = identity("Hello"); // type is 'Hello'
+              </script>
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <img src="https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif" />
+        </section>
+
+        <section data-auto-animate>
+          <section data-auto-animate>
+            <h3>One more thing...</h3>
+          </section>
+
+          <section data-auto-animate>
+            <h3>One more thing...</h3>
+
+            <img src="https://media.giphy.com/media/o3allOg27ffgI/giphy.gif" />
+          </section>
+        </section>
+
+        <section data-auto-animate>
+          <h3>TypeScript Code Golf</h3>
+
+          <pre><code data-trim data-noescape class="language-typescript">
+            <script type="text/template">
+              // Construct the following type
+
+              type Output =
+                | [0, 0, 0]
+                | [0, 0, 1]
+                | [0, 1, 0]
+                | [0, 1, 1]
+                | [1, 0, 0]
+                | [1, 0, 1]
+                | [1, 1, 0]
+                | [1, 1, 1]
+            </script>
+          </code></pre>
+
+          <p class="fragment">Shortest answer wins</p>
+        </section>
+        <section data-auto-animate>
+          <img
+            src="https://media.giphy.com/media/26gsspfbt1HfVQ9va/giphy.gif"
+          />
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
